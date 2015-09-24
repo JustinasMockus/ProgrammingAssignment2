@@ -1,30 +1,44 @@
-#For aaasignment https://class.coursera.org/rprog-032/human_grading/view/courses/975106/assessments/3/submissions
+#ProgrammingAssignment2
+#Caching the Inverse of a Matrix
+
+#Right belov after this line you'll find rows for testing:
+#Create matrix
+#   mtrx <- matrix(c(1,20,51,3,4,15,30,6,0), nrow=3, ncol=3)
+#   solv <- makeCacheMatrix(mtrx)
+#   cacheSolve(solv)
+#Launch again and see that data is take from cache
+#   cacheSolve(solv)
+
 makeCacheMatrix <- function(x = matrix()) {
               m<- NULL
               set <- function(y) {
                   x <<- y
                   m <<- NULL
               }
+              #get matrix value
               get <- function() x
-              setinverse <- function(solve) m <<- solve
-              getinverse <- function() m
+              setsolve <- function(solve) m <<- solve
+              getsolve <- function() m
+              #storing functions in makeCacheMatrix
               list(set = set, get = get,
-                   setinverse = setinverse,
-                   getinverse = getinverse)
+                   setsolve = setsolve,
+                   getsolve = getsolve)
 }
 
-
-## Write a short comment describing this function
-
+## Creating matrix which is a list
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
-              m <- x$getinverse()
+  ## Return a matrix that is the inverse of 'x' variable
+              m <- x$getsolve()
               if(!is.null(m)) {
                 message("getting cached data")
                 return(m)
               }
+              #geting
               data <- x$get()
+              #solving
               m <- solve(data, ...)
-              x$setinverse(m)
+              #setting
+              x$setsolve(m)
+              #returning
               m
 }
